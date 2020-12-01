@@ -24,7 +24,7 @@ class Oystercard
   end
 
   def touch_out
-    deduct(MINIMUM_FARE)
+    deduct_fare(MINIMUM_FARE)
     
     @in_use = false
   end
@@ -34,8 +34,9 @@ class Oystercard
   end
 
   private
-  def deduct(money)
-    @balance -= MINIMUM_FARE
+
+  def deduct_fare(fare = MINIMUM_FARE)
+    @balance -= fare
   end
 
 end
