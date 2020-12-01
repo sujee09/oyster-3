@@ -1,7 +1,6 @@
 require 'oystercard'
 
 describe Oystercard do
-
   shared_context 'fully topped up oystercard' do
     before do
       @balance_limit = Oystercard::BALANCE_LIMIT
@@ -100,8 +99,14 @@ describe Oystercard do
       subject.touch_out
       expect(subject).not_to be_in_journey
     end
-  end
 
-  # testing testing
+    it 'deducts fare when touch_out' do
+      minimum_fare = Oystercard::MINIMUM_FARE
+      subject.top_up(10)
+      subject.touch_in
+      subject.touch_out
+      expect{ subject.touch_out }.to change{ subject.balance }.by(-minimum_fare)
+    end
+  end
 
 end
