@@ -81,8 +81,21 @@ describe Oystercard do
     end
   end
 
+  describe '#touch_in' do
+    it 'Cant be used if it doesnt have atleast £1' do
+      expect { subject.touch_in }.to raise_error 'Have insufficient funds'
+    end
+
+    it 'Should allow to touch in' do
+      subject.top_up(5)
+      subject.touch_in
+      expect(subject).to be_in_journey
+    end
+  end
+
   describe '#touch_out' do
     it 'can touch out' do
+      subject.top_up(50)
       subject.touch_in
       subject.touch_out
       expect(subject).not_to be_in_journey

@@ -6,6 +6,7 @@ class Oystercard
   def initialize
     @balance = 0
     @in_use = false
+    @minimum_fair = 1
   end
 
   def top_up(amount)
@@ -18,6 +19,7 @@ class Oystercard
   end
 
   def touch_in
+    fail "Have insufficient funds" if @balance < @minimum_fair
     @in_use = true
   end
 
@@ -29,6 +31,6 @@ class Oystercard
     @in_use
   end
 
-#Testing to see if im pushing to the right repo
+
 
 end
