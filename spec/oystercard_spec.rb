@@ -102,14 +102,6 @@ describe Oystercard do
       subject.touch_out(exit_station)
       expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-minimum_fare)
     end
-
-    let(:journeys){ {entry_station: entry_station, exit_station: exit_station} }
-
-    it 'stores a journey' do
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.journeys).to include journey
-    end
   end
 
   describe '#entry_station' do
@@ -120,4 +112,14 @@ describe Oystercard do
       expect(subject.entry_station).to eq entry_station
     end
   end
+
+  describe '#method' do
+    let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+    it 'stores a journey' do
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      expect(subject.journeys).to include journey
+    end
+  end
+
 end
