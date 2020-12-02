@@ -1,7 +1,7 @@
 require 'oystercard'
 
 describe Oystercard do
-  let(:station){double :station}
+
   shared_context 'fully topped up oystercard' do
     before do
       @balance_limit = Oystercard::BALANCE_LIMIT
@@ -75,6 +75,7 @@ describe Oystercard do
 
   describe '#touch_in' do
     include_context "fully topped up oystercard"
+    let(:station){double :station}
     it 'can touch in' do
       subject.touch_in(station)
       expect(subject).to be_in_journey
@@ -82,11 +83,13 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
+    let(:station){double :station}
     it 'Cant be used if it doesnt have atleast £1' do
       expect { subject.touch_in(station) }.to raise_error 'Have insufficient funds'
     end
 
     it 'Should allow to touch in' do
+
       subject.top_up(5)
       subject.touch_in(station)
       expect(subject).to be_in_journey
@@ -94,6 +97,7 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
+    let(:station){double :station}
     it 'can touch out' do
       subject.top_up(50)
       subject.touch_in(station)
@@ -112,7 +116,7 @@ describe Oystercard do
 
 
   describe '#entry_station' do
-
+    let(:station){double :station}
     it 'stores the entry station' do
       subject.top_up(10)
       subject.touch_in(station)

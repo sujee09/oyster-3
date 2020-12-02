@@ -8,7 +8,6 @@ class Oystercard
   def initialize
     @balance = 0
     @in_use = false
-    @entry_station = entry_station
   end
 
   def top_up(amount)
@@ -22,6 +21,7 @@ class Oystercard
 
   def touch_in(station)
     fail "Have insufficient funds" if @balance < MINIMUM_FARE
+    @entry_station = station
     @in_use = true
   end
 
