@@ -113,13 +113,10 @@ describe Oystercard do
     end
   end
 
-  describe '#method' do
-    let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+  describe '#journeys' do
+    let(:journeys) { { entry_station: entry_station, exit_station: exit_station } }
     it 'stores a journey' do
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.journeys).to include journey
+      expect(subject.journeys).to include { { entry_station: entry_station, exit_station: exit_station } }
     end
   end
-
 end

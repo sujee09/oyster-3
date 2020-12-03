@@ -1,3 +1,5 @@
+require_relative 'station.rb'
+
 class Oystercard
   attr_reader :balance, :entry_station, :exit_station, :journeys
 
@@ -22,24 +24,20 @@ class Oystercard
 
   def touch_in(station)
     raise 'Have insufficient funds' if @balance < MINIMUM_FARE
-    @entry_station = station
-    @journeys["entry_station"] = station
 
+    @entry_station = station
+    @journeys['entry_station'] = station
   end
 
   def touch_out(station)
     deduct_fare(MINIMUM_FARE)
     @entry_station = nil
     @exit_station = station
-    @journeys["exit_journey"] = station
+    @journeys['exit_journey'] = station
   end
 
   def in_journey?
     !!entry_station
-  end
-
-  def show_journey
-
   end
 
   private
